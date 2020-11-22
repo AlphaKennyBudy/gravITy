@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:orientation="horizontal"
     tools:context=".MainActivity"
-    android:background="@color/blue">
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/image"
@@ -18,37 +18,41 @@
         android:contentDescription="@string/todo"
         android:src="@drawable/logo" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imgBtnRes"
-        android:layout_width="72dp"
-        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/select_file"
 
-        android:layout_marginTop="500dp"
-        android:contentDescription="@string/todo"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:text="@string/my_results"
         android:src="@drawable/res" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageBtn3"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:src = "@drawable/next"
-        android:contentDescription="@string/todo"
-        android:layout_marginLeft="150dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="500dp"
+        android:text="@string/next"
+        android:layout_below="@id/select_file"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
         android:visibility="visible"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:layout_below="@+id/image"
         android:id="@+id/editTextTextMultiLine"
         android:layout_width="1000px"
-        android:layout_height="200px"
+        android:layout_height="600px"
         android:ems="10"
+        android:textSize="10dp"
+        android:hint="@string/enter_your_questions_here"
         android:gravity="start|top"
         android:inputType="textMultiLine" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/select_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

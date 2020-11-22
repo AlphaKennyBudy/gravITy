@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -68,7 +70,7 @@ public class TestActivity extends AppCompatActivity {
         rb5.setText(q[4].substring(q[0].indexOf(">")+1));
         //}
         int asked=1;
-        ImageButton imgN = findViewById(R.id.imgnext);
+        MaterialButton imgN = findViewById(R.id.imgnext);
         imgN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +97,11 @@ public class TestActivity extends AppCompatActivity {
             intent.putStringArrayListExtra("res",res);
             startActivity(intent);
         }
-        ans = questions[ind+1];
-        String[] q = {questions[ind+1],questions[ind+2],questions[ind+3],questions[ind+4], questions[ind+5]};
+        ans = questions[(ind+1)%questions.length];
+        String[] q = {questions[(ind+1)%questions.length],questions[(ind+2)%questions.length],questions[(ind+3)%questions.length],questions[(ind+4)%questions.length], questions[(ind+5)%questions.length]};
         Log.d("TestActivity: 102", Arrays.toString(q));
         Log.d("TestActivity: 103", questions.length +" - " + questions[0]);
-        tv.setText(questions[ind].substring(questions[0].indexOf(">")+1));
+        tv.setText(questions[ind%questions.length].substring(questions[0].indexOf(">")+1));
         List<String> var = Arrays.asList(q);
         Collections.shuffle(var);
         var.toArray(q);

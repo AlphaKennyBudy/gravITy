@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultActivitySecond"
-    android:background="@color/blue">
+    android:background="@color/background">
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
@@ -33,24 +33,23 @@
         android:textColor="@color/black"
         android:gravity="center_horizontal" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imgBtnHome"
-        android:layout_width="120dp"
-        android:layout_height="110dp"
-        app:srcCompat="@drawable/house"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/result"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
-        android:contentDescription="@string/home" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:text="Home" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:srcCompat="@android:drawable/ic_menu_rotate"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="230dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/result"
         android:contentDescription="@string/todo"

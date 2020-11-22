@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 
 public class SolveQuestionsActivity extends AppCompatActivity {
@@ -33,7 +35,7 @@ public class SolveQuestionsActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, countQ);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        ImageButton ib = findViewById(R.id.imageBtn1);
+        MaterialButton ib = findViewById(R.id.imageBtn1);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

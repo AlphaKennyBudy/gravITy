@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -38,7 +40,7 @@ public class ResultActivitySecond extends AppCompatActivity {
         res = arg.getStringArrayList("res");
         tv=findViewById(R.id.result);
         tv.setText(find + "/" + asked);
-        ImageButton imgB = findViewById(R.id.imgBtnHome);
+        MaterialButton imgB = findViewById(R.id.imgBtnHome);
         imgB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

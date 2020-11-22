@@ -21,4 +21,8 @@
     <color name="black">#000000</color>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_results">My results</string>
+    <string name="next">Next</string>
+    <string name="enter_your_questions_here">Enter your questions here</string>
+    <string name="back">Back</string>
 </resources>

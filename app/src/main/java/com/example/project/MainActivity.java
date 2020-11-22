@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
@@ -56,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
         Bundle arg = getIntent().getExtras();
         if (arg != null)
             res = arg.getStringArrayList("res");
-        ImageButton imgRes = findViewById(R.id.imgBtnRes);
+        MaterialButton imgRes = findViewById(R.id.imgBtnRes);
         ed = findViewById(R.id.editTextTextMultiLine);
         imgRes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 goResults();
             }
         });
-        ImageButton btn = findViewById(R.id.imageBtn3);
+        MaterialButton btn = findViewById(R.id.imageBtn3);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 readFile_();

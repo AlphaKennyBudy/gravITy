@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 public class ResultActivity extends AppCompatActivity {
     int find;
     int asked;
@@ -23,7 +25,7 @@ public class ResultActivity extends AppCompatActivity {
         asked = Integer.parseInt(arg.get("asked").toString());
         q=arg.get("ques").toString();
         tv.setText(find + "/" + asked);
-        ImageButton imgB = findViewById(R.id.imgBtnHome);
+        MaterialButton imgB = findViewById(R.id.imgBtnHome);
         imgB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
