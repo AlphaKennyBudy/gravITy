@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.content.ActivityNotFoundException;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.SimpleDateFormat;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,15 +28,23 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -42,12 +52,14 @@ import static android.view.View.*;
 
 public class MainActivity extends AppCompatActivity {
     private static final int FILE_PICKER_REQUEST_CODE = 10;
+    public final String FONT = "res/font/bitter.ttf";
     Intent myFileIntent;
     FileReader fr;
     int count = 1;
     String questions = "";
     ArrayList<String> res = new ArrayList<>();
     EditText ed;
+    String path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +82,43 @@ public class MainActivity extends AppCompatActivity {
                 readFile_();
             }
         });
+
+        MaterialButton pdfBtn = findViewById(R.id.save_pdf);
+        pdfBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        String[] parmission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(parmission, 1000);
+                    } else savePdf();
+                } else savePdf();
+            }
+        });
+    }
+
+    private void savePdf() {
+        Document doc = new Document();
+        if (!path.isEmpty() && !ed.getText().toString().isEmpty()) {
+            String mfilepath = path.replace("txt", "pdf");
+
+            try {
+                BaseFont bf = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font smallBold = new Font(bf, 12, Font.BOLD);
+
+                PdfWriter.getInstance(doc, new FileOutputStream(mfilepath));
+                doc.open();
+                String mtext = ed.getText().toString();
+                doc.addAuthor("Gravity");
+                doc.add(new Paragraph(mtext, smallBold));
+                doc.close();
+                Toast.makeText(this, "Is saved to " + mfilepath, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "This is Error msg : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Unable to save", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -83,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
                     // show a msg to user
                 }
             }
+            case 1000:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    savePdf();
+                } else Toast.makeText(this, "parmission denied..", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -152,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void readTxt(String path) {
         BufferedReader br = null;
+        this.path = path;
 
         try {
 
@@ -161,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             br = new BufferedReader(new FileReader(path));
 
             while ((sCurrentLine = br.readLine()) != null) {
-                text += sCurrentLine+"\n";
+                text += sCurrentLine + "\n";
             }
 
             ed.setText(text);

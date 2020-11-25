@@ -62,5 +62,14 @@
         android:onClick="selectFile"
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pdf"
+        android:layout_below="@id/editTextTextMultiLine"
+        android:layout_alignParentRight="true"
+        />
+
 
 </RelativeLayout>
